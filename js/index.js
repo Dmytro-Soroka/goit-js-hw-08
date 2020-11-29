@@ -49,7 +49,6 @@ galleryRef.addEventListener("click", (e) => {
 buttonClose.addEventListener("click", closeLightBox);
 divOverlay.addEventListener("click", closeLightBox);
 
-
 function closeLightBox() {  
     window.removeEventListener('keydown', onPressEscape);
     divLightbox.classList.remove("is-open");
@@ -67,6 +66,8 @@ function onPressEscape(e) {
         pressRight();
     }
 }
+
+
 
 function setModalImageAttribute(step, index) {
     imgModal.src = newGalleryItems[index + step].original;
