@@ -7,7 +7,6 @@ const imgModal = document.querySelector(".lightbox__image");
 const buttonClose = document.querySelector(".lightbox__button");
 
 
-
 const createGallery = (item, i) => {
     const galleryItemRef = document.createElement('li');
     galleryItemRef.classList.add('gallery__item');
@@ -36,41 +35,38 @@ galleryRef.append(...items);
 
 
 galleryRef.addEventListener("click", (e) => {
-  e.preventDefault();
-  let modalLink = e.target.dataset.source;
-  divLightbox.classList.add("is-open");
-  imgModal.src = modalLink;
-  imgModal.dataset.i = e.target.dataset.i
-});
-
-buttonClose.addEventListener("click", () => {
-    divLightbox.classList.remove("is-open");
-    imgModal.src = "";
-});
-
-divOverlay.addEventListener("click", () => {
-    divLightbox.classList.remove("is-open");
-    imgModal.src = "";
-});
-
-window.addEventListener("keyup", (event) => {
-    if (event.kode === "Escape") {
-        divLightbox.classList.remove("is-open");
-        imgModal.src = "";
+    if (e.target.nodeName !== "IMG") {
+        return;
     }
+    e.preventDefault();
+    window.addEventListener('keydown', onPressEscape);
+    let modalLink = e.target.dataset.source;
+    divLightbox.classList.add("is-open");
+    imgModal.src = modalLink;
+    imgModal.dataset.i = e.target.dataset.i
 });
 
-window.addEventListener("keyup", (event) => {
-    if (event.kode === "ArrowLeft") {
+buttonClose.addEventListener("click", closeLightBox);
+divOverlay.addEventListener("click", closeLightBox);
+
+
+function closeLightBox() {  
+    window.removeEventListener('keydown', onPressEscape);
+    divLightbox.classList.remove("is-open");
+    imgModal.src = "";
+}
+
+function onPressEscape(e) {
+    if (e.code === 'Escape') {
+        onCloseModal();
+    }
+    if (e.code === "ArrowLeft") {
         pressLeft();
     }
-});
-
-window.addEventListener("keyup", (event) => {
-    if (event.kode === "ArrowRight") {
+    if (escape.code === "ArrowRight") {
         pressRight();
     }
-});
+}
 
 function setModalImageAttribute(step, index) {
     imgModal.src = newGalleryItems[index + step].original;
@@ -89,3 +85,5 @@ function pressRight() {
     if (index === newGalleryItems.length - 1) return;
     setModalImageAttribute(1, index);    
 }
+
+
