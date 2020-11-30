@@ -7,7 +7,7 @@ const imgModal = document.querySelector(".lightbox__image");
 const buttonClose = document.querySelector(".lightbox__button");
 
 
-const createGallery = (item, i) => {
+const createGallery = (item, index) => {
     const galleryItemRef = document.createElement('li');
     galleryItemRef.classList.add('gallery__item');
 
@@ -20,7 +20,7 @@ const createGallery = (item, i) => {
     galleryImageRef.setAttribute('src', item.preview);
     galleryImageRef.setAttribute('data-source', item.original);
     galleryImageRef.setAttribute('alt', item.description);
-    galleryImageRef.setAttribute('data-index', i);
+    galleryImageRef.setAttribute('dataset', index);
 
 
     galleryLinkRef.appendChild(galleryImageRef);
@@ -43,7 +43,7 @@ galleryRef.addEventListener("click", (e) => {
     let modalLink = e.target.dataset.source;
     divLightbox.classList.add("is-open");
     imgModal.src = modalLink;
-    imgModal.dataset.i = e.target.dataset.i
+    imgModal.dataset.index = e.target.dataset.index;
 });
 
 buttonClose.addEventListener("click", closeLightBox);
@@ -57,7 +57,7 @@ function closeLightBox() {
 
 function onPressEscape(e) {
     if (e.code === 'Escape') {
-        onCloseModal();
+        closeLightBox();
     }
     if (e.code === "ArrowLeft") {
         pressLeft();
