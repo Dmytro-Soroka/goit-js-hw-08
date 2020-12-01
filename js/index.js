@@ -62,7 +62,7 @@ function onPressEscape(e) {
     if (e.code === "ArrowLeft") {
         pressLeft();
     }
-    if (escape.code === "ArrowRight") {
+    if (e.code === "ArrowRight") {
         pressRight();
     }
 }
