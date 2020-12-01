@@ -20,7 +20,7 @@ const createGallery = (item, index) => {
     galleryImageRef.setAttribute('src', item.preview);
     galleryImageRef.setAttribute('data-source', item.original);
     galleryImageRef.setAttribute('alt', item.description);
-    galleryImageRef.setAttribute('dataset', index);
+    galleryImageRef.setAttribute('data-index', index);
 
 
     galleryLinkRef.appendChild(galleryImageRef);
